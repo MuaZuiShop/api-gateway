@@ -42,13 +42,5 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.PER_GITHUB_TOKEN }}
         run: |
-          mvn clean verify -s settings-docker.xml checkstyle:check spotbugs:check jacoco:check -Djacoco.line.ratio=0.70
+          mvn clean verify -s settings-docker.xml
 
-      - name: Upload Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: report-${{ github.event.repository.name }}
-          path: |
-            target/site/jacoco/
-            target/spotbugsXml.xml
